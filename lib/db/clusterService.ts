@@ -339,7 +339,7 @@ export async function createReportAndUpdateCluster(input: CreateReportInput) {
   } catch (error) {
     if (client) await client.query("rollback").catch(() => undefined);
     logPostgresFallback("create report", error);
-    return createDemoReport({ ...input, rainfallRiskScore });
+    throw error;
   } finally {
     client?.release();
   }
@@ -366,7 +366,7 @@ export async function getDashboardPayload(): Promise<DashboardPayload> {
       clusters,
       reports,
       summary: {
-        totalReports: reports.length,
+        totalReports: clusters.reduce((sum, cluster) => sum + cluster.report_count, 0),
         openClusters: clusters.filter((cluster) => !["resolved", "citizen_verified"].includes(cluster.status)).length,
         criticalClusters: clusters.filter((cluster) => cluster.severity === "critical").length,
         topCategory: topCategory as DashboardPayload["summary"]["topCategory"],

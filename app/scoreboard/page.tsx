@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Award, Loader2, Medal, RefreshCw, Trophy } from "lucide-react";
+import { useDataRefresh } from "@/lib/useDataRefresh";
 import type { DemoUser } from "@/types";
 
 type ScoreboardUser = DemoUser & { rank: number };
@@ -42,6 +43,7 @@ export default function ScoreboardPage() {
   useEffect(() => {
     loadScoreboard();
   }, []);
+  useDataRefresh(loadScoreboard);
 
   const topThree = users.slice(0, 3);
   const podiumUsers = [topThree[1], topThree[0], topThree[2]].filter(Boolean);

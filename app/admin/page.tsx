@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { CheckCircle2, Loader2, ShieldCheck, XCircle } from "lucide-react";
 import { formatCategory, formatSeverity } from "@/lib/format";
+import { notifyDataChanged, useDataRefresh } from "@/lib/useDataRefresh";
 import type { DemoUser, IssueValidationRow } from "@/types";
 
 export default function AdminPage() {
@@ -28,6 +29,7 @@ export default function AdminPage() {
       })
     });
     await loadValidations();
+    notifyDataChanged();
   }
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function AdminPage() {
     setUser(stored ? JSON.parse(stored) : null);
     loadValidations();
   }, []);
+  useDataRefresh(loadValidations);
 
   const isAdmin = user?.role === "admin";
 

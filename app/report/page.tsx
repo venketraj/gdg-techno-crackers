@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { Camera, Crosshair, Loader2, MapPin, Send } from "lucide-react";
 import { formatCategory, formatSeverity } from "@/lib/format";
+import { notifyDataChanged } from "@/lib/useDataRefresh";
 import type { IssueClusterRow, ReportRow, ClassificationResult, DemoUser } from "@/types";
 
 const defaultLatitude = Number(process.env.NEXT_PUBLIC_DEFAULT_LATITUDE || 9.9252);
@@ -126,6 +127,7 @@ export default function ReportPage() {
       return;
     }
     setResult(data);
+    notifyDataChanged();
   }
 
   return (

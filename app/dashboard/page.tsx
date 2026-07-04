@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Activity, AlertTriangle, BarChart3, CheckCircle2, ClipboardList, FolderOpen, Loader2, RefreshCw, Star } from "lucide-react";
 import { formatCategory, formatSeverity, formatStatus } from "@/lib/format";
+import { notifyDataChanged, useDataRefresh } from "@/lib/useDataRefresh";
 import type { CivicCategory, ClusterStatus, DashboardPayload } from "@/types";
 
 const ClusterMap = dynamic(() => import("@/components/ClusterMap"), { ssr: false });
@@ -113,12 +114,16 @@ export default function DashboardPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status, note: `Set to ${status} from dashboard` })
     });
-    if (response.ok) await loadDashboard();
+    if (response.ok) {
+      await loadDashboard();
+      notifyDataChanged();
+    }
   }
 
   useEffect(() => {
     loadDashboard();
   }, []);
+  useDataRefresh(loadDashboard);
 
   const analytics = useMemo(() => {
     if (!data) return null;

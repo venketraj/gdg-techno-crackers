@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { AlertTriangle, Loader2, MapPinned, RefreshCw } from "lucide-react";
 import { formatCategory, formatSeverity, formatStatus } from "@/lib/format";
+import { useDataRefresh } from "@/lib/useDataRefresh";
 import type { DashboardPayload } from "@/types";
 
 const ClusterMap = dynamic(() => import("@/components/ClusterMap"), { ssr: false });
@@ -40,6 +41,7 @@ export default function MapViewPage() {
   useEffect(() => {
     loadMapData();
   }, []);
+  useDataRefresh(loadMapData);
 
   const clusters = data?.clusters || [];
   const highestPriority = clusters[0];
