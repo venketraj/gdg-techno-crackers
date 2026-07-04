@@ -1634,7 +1634,8 @@ button.tiny.secondary {
     z-index: 30;
     height: auto;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(190px, auto) minmax(0, 1fr);
+    align-items: start;
     gap: 12px;
     padding: 14px;
   }
@@ -1645,14 +1646,15 @@ button.tiny.secondary {
 
   .sideNav {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 3px;
-    scrollbar-width: thin;
+    overflow: visible;
+    padding-bottom: 0;
   }
 
   .sideNav a {
-    flex: 0 0 auto;
+    flex: 0 1 auto;
     min-height: 42px;
     padding: 0 12px;
   }
@@ -1693,6 +1695,8 @@ button.tiny.secondary {
   .sidebar {
     position: static;
     height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 14px;
     padding: 16px 14px;
   }
@@ -1700,13 +1704,13 @@ button.tiny.secondary {
     max-width: none;
   }
   .sideNav {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
+    overflow: visible;
+    padding-bottom: 0;
   }
   .sideNav a {
-    flex: 0 0 auto;
     min-height: 40px;
     padding: 0 12px;
   }
@@ -1872,6 +1876,7 @@ button.tiny.secondary {
   }
 
   .sideNav a {
+    justify-content: flex-start;
     gap: 8px;
     min-height: 38px;
     padding: 0 10px;
@@ -2021,6 +2026,12 @@ button.tiny.secondary {
 
   .settingsHero h2 {
     font-size: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  .sideNav {
+    grid-template-columns: 1fr;
   }
 }
 
