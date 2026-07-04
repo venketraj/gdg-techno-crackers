@@ -24,6 +24,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -1291,6 +1292,7 @@ button:disabled {
 .tableWrap {
   overflow-x: auto;
   border-radius: 8px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .podium {
@@ -1616,8 +1618,75 @@ button.tiny.secondary {
   70%, 100% { transform: translateX(420%) rotate(22deg); }
 }
 
+@media (max-width: 1080px) {
+  main {
+    max-width: none;
+    padding: 24px 18px 52px;
+  }
+
+  .appShell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    height: auto;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .sidebarBrand {
+    min-width: 210px;
+  }
+
+  .sideNav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    scrollbar-width: thin;
+  }
+
+  .sideNav a {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 0 12px;
+  }
+
+  .sideNav a:hover,
+  .sideNav a.active {
+    transform: translateY(-1px);
+  }
+
+  .weatherCard {
+    display: none;
+  }
+
+  .utilityBar {
+    position: static;
+  }
+
+  .grid.four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboardPanels,
+  .analyticsGrid,
+  .mapPageGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mapInsightPanel {
+    position: static;
+  }
+}
+
 @media (max-width: 820px) {
-  main { padding: 20px 14px 44px; }
+  main { padding: 18px 12px 44px; }
   .appShell {
     grid-template-columns: 1fr;
   }
@@ -1659,6 +1728,7 @@ button.tiny.secondary {
   .hero,
   .homeHero,
   .split,
+  .dashboardPanels,
   .analyticsGrid,
   .mapPageGrid,
   .settingsHero,
@@ -1670,6 +1740,19 @@ button.tiny.secondary {
   }
   .homeHero {
     padding: 20px;
+  }
+  .heroCopy h1,
+  .sectionHeader h1,
+  .dashboardHeader h1 {
+    font-size: clamp(30px, 10vw, 42px);
+  }
+  .surface,
+  .mapCard,
+  .issueMixCard,
+  .clusterTableCard,
+  .mapFocusCard,
+  .mapInsightPanel {
+    padding: 14px;
   }
   .heroDashboard {
     padding: 12px;
@@ -1688,6 +1771,28 @@ button.tiny.secondary {
   }
   .mapInsightPanel {
     position: static;
+  }
+  .issueMixBody {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .issueMixBody .barList {
+    width: 100%;
+  }
+  .metric {
+    min-height: 118px;
+    padding: 16px;
+  }
+  .metricFoot {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .metricFoot svg {
+    max-width: 170px;
+  }
+  .tableHeader {
+    align-items: start;
+    flex-direction: column;
   }
   .settingsList div {
     align-items: start;
@@ -1734,6 +1839,189 @@ button.tiny.secondary {
   .podiumFirst { order: 1; }
   .podiumSecond { order: 2; }
   .podiumThird { order: 3; }
+}
+
+@media (max-width: 560px) {
+  body::before {
+    background-size: 32px 32px;
+  }
+
+  main {
+    padding: 14px 10px 36px;
+  }
+
+  .sidebar {
+    gap: 12px;
+    padding: 12px 10px;
+  }
+
+  .sidebarBrand {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .sidebarBrand strong {
+    font-size: 15px;
+  }
+
+  .brandMark {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  .sideNav a {
+    gap: 8px;
+    min-height: 38px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .sideNav svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .utilityBar {
+    gap: 10px;
+    padding: 12px 10px;
+  }
+
+  .utilityActions {
+    gap: 8px;
+  }
+
+  .utilityActions a,
+  .iconButton,
+  .userChip {
+    min-height: 36px;
+    padding: 7px 9px;
+    font-size: 12px;
+  }
+
+  .pageStack {
+    gap: 16px;
+  }
+
+  .homeHero {
+    padding: 16px;
+  }
+
+  .hero,
+  .homeHero {
+    gap: 18px;
+  }
+
+  .actions,
+  .rowActions,
+  .compactNotice {
+    width: 100%;
+  }
+
+  .actions .button,
+  .actions button,
+  .compactNotice .button,
+  .rowActions button {
+    width: 100%;
+  }
+
+  .demoLoop div {
+    min-height: 70px;
+    padding: 15px;
+  }
+
+  .heroMap {
+    min-height: 190px;
+    padding: 14px;
+  }
+
+  .preview,
+  .emptyPhoto {
+    height: 220px;
+  }
+
+  .resultGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .resultGrid .wide {
+    grid-column: auto;
+  }
+
+  .grid.four {
+    grid-template-columns: 1fr;
+  }
+
+  .metricTop {
+    gap: 10px;
+  }
+
+  .metricIcon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+
+  .metric strong {
+    font-size: 28px;
+  }
+
+  .donutChart {
+    width: 118px;
+    height: 118px;
+  }
+
+  .donutChart::after {
+    inset: 17px;
+  }
+
+  .donutChart strong {
+    font-size: 25px;
+  }
+
+  .map,
+  .mapCard .map {
+    height: 300px;
+  }
+
+  .mapFrame.large .map {
+    height: 360px;
+  }
+
+  .heatLegend {
+    justify-content: center;
+  }
+
+  table {
+    min-width: 720px;
+  }
+
+  th,
+  td {
+    padding: 10px 12px;
+  }
+
+  .podium {
+    gap: 12px;
+  }
+
+  .podiumCard {
+    padding: 18px 14px;
+  }
+
+  .medalRing {
+    width: 58px;
+    height: 58px;
+  }
+
+  .settingsHero {
+    padding: 16px;
+  }
+
+  .settingsHero h2 {
+    font-size: 22px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
