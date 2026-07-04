@@ -26,8 +26,17 @@ const reports: ReportRow[] = cloneSeed(demoSeed.reports);
 const users: DemoUser[] = cloneSeed(demoSeed.users);
 const validations: IssueValidationRow[] = cloneSeed(demoSeed.validations);
 
-function voiceTitleForScore(score: number) {
-  return score >= 120 ? "Voice of Madurai" : null;
+function syncVoiceOfMaduraiTitle() {
+  const rankedCitizens = users
+    .filter((user) => user.role === "citizen")
+    .sort((a, b) => b.score - a.score);
+  const winnerId = rankedCitizens[0]?.score >= 120 ? rankedCitizens[0].id : null;
+
+  for (const user of users) {
+    if (user.role === "citizen") {
+      user.title = user.id === winnerId ? "Voice of Madurai" : null;
+    }
+  }
 }
 
 function scoreAuthenticity(input: {
@@ -50,7 +59,7 @@ function awardUserScore(userId: string | null | undefined, points: number, valid
   if (!user) return null;
   user.score += points;
   if (validated) user.reportsValidated += 1;
-  user.title = voiceTitleForScore(user.score);
+  syncVoiceOfMaduraiTitle();
   return user;
 }
 
@@ -63,6 +72,7 @@ export function loginDemoUser(identifier: string) {
 }
 
 export function getDemoScoreboard() {
+  syncVoiceOfMaduraiTitle();
   return [...users]
     .filter((user) => user.role === "citizen")
     .sort((a, b) => b.score - a.score)
