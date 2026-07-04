@@ -1,10 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Award, Loader2, RefreshCw } from "lucide-react";
+import { Award, Loader2, Medal, RefreshCw, Trophy } from "lucide-react";
 import type { DemoUser } from "@/types";
 
 type ScoreboardUser = DemoUser & { rank: number };
+
+const podiumConfig = {
+  1: {
+    label: "Gold",
+    className: "gold",
+    place: "1st",
+    orderClass: "podiumFirst"
+  },
+  2: {
+    label: "Silver",
+    className: "silver",
+    place: "2nd",
+    orderClass: "podiumSecond"
+  },
+  3: {
+    label: "Bronze",
+    className: "bronze",
+    place: "3rd",
+    orderClass: "podiumThird"
+  }
+} as const;
 
 export default function ScoreboardPage() {
   const [users, setUsers] = useState<ScoreboardUser[]>([]);
@@ -22,6 +43,9 @@ export default function ScoreboardPage() {
     loadScoreboard();
   }, []);
 
+  const topThree = users.slice(0, 3);
+  const podiumUsers = [topThree[1], topThree[0], topThree[2]].filter(Boolean);
+
   return (
     <section className="pageStack">
       <div className="dashboardHeader">
@@ -35,6 +59,29 @@ export default function ScoreboardPage() {
           Refresh
         </button>
       </div>
+
+      {podiumUsers.length > 0 && (
+        <div className="podium" aria-label="Top 3 scoreboard members">
+          {podiumUsers.map((user) => {
+            const config = podiumConfig[user.rank as 1 | 2 | 3];
+
+            return (
+              <article className={`podiumCard ${config.className} ${config.orderClass}`} key={user.id}>
+                <div className="medalRing" aria-label={`${config.label} medal`}>
+                  {user.rank === 1 ? <Trophy size={28} /> : <Medal size={28} />}
+                </div>
+                <span className="podiumRank">{config.place}</span>
+                <h2>{user.name}</h2>
+                <p>{user.ward}</p>
+                <strong>{user.score}</strong>
+                <span className="podiumMeta">
+                  {user.reportsValidated} validated / {user.reportsSubmitted} reports
+                </span>
+              </article>
+            );
+          })}
+        </div>
+      )}
 
       <div className="surface">
         <div className="tableWrap">
