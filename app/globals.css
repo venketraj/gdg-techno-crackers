@@ -839,9 +839,42 @@ button:disabled {
   border-radius: 8px;
 }
 
+.mapFrame.large .map {
+  height: 560px;
+}
+
 .mapCard .map {
   height: 220px;
   box-shadow: none;
+}
+
+.mapPageGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  align-items: start;
+}
+
+.mapFocusCard,
+.mapInsightPanel {
+  padding: 18px;
+}
+
+.mapInsightPanel {
+  position: sticky;
+  top: 86px;
+  display: grid;
+  gap: 16px;
+}
+
+.mapInsightPanel h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.mapInsightPanel > strong {
+  font-size: 42px;
+  line-height: 1;
 }
 
 .heatLegend {
@@ -889,6 +922,94 @@ button:disabled {
   color: var(--accent);
   font-size: 13px;
   font-weight: 900;
+}
+
+.settingsHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 20px;
+  align-items: center;
+  padding: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(242, 240, 255, 0.9)),
+    repeating-linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0 1px, transparent 1px 14px);
+}
+
+.settingsHero h2 {
+  margin: 10px 0 8px;
+  font-size: 28px;
+}
+
+.settingsStatus {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  box-shadow: var(--shadow-soft);
+}
+
+.settingsStatus svg {
+  color: var(--accent);
+}
+
+.settingsStatus span,
+.settingsList span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.settingsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.settingsCard {
+  display: grid;
+  gap: 16px;
+}
+
+.settingsCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.settingsCardHeader svg {
+  color: var(--accent);
+}
+
+.settingsCardHeader h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.settingsList {
+  display: grid;
+  gap: 10px;
+}
+
+.settingsList div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fbfcff;
+}
+
+.settingsList.wide div {
+  align-items: start;
+}
+
+.settingsList strong {
+  text-align: right;
+  font-size: 14px;
 }
 
 .analyticsGrid {
@@ -1539,6 +1660,9 @@ button.tiny.secondary {
   .homeHero,
   .split,
   .analyticsGrid,
+  .mapPageGrid,
+  .settingsHero,
+  .settingsGrid,
   .featureGrid,
   .grid.four,
   .grid.two {
@@ -1559,6 +1683,19 @@ button.tiny.secondary {
   }
   .resultPanel { position: static; }
   .map { height: 360px; }
+  .mapFrame.large .map {
+    height: 420px;
+  }
+  .mapInsightPanel {
+    position: static;
+  }
+  .settingsList div {
+    align-items: start;
+    flex-direction: column;
+  }
+  .settingsList strong {
+    text-align: left;
+  }
   .insightHero {
     grid-template-columns: 1fr;
     justify-items: start;

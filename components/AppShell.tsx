@@ -20,9 +20,9 @@ const navItems = [
   { href: "/report", label: "Citizen Report", icon: ClipboardList },
   { href: "/scoreboard", label: "Scoreboard", icon: Trophy },
   { href: "/dashboard#reports", label: "Reports", icon: FileBarChart },
-  { href: "/dashboard#map", label: "Map View", icon: MapPinned },
+  { href: "/map", label: "Map View", icon: MapPinned },
   { href: "/dashboard#departments", label: "Departments", icon: UsersRound },
-  { href: "/dashboard#settings", label: "Settings", icon: Settings },
+  { href: "/settings", label: "Settings", icon: Settings },
   { href: "/admin", label: "Admin", icon: UserRound }
 ];
 
