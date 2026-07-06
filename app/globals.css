@@ -1993,13 +1993,46 @@ button.tiny.secondary {
     overflow-x: hidden;
   }
 
+  .pageStack,
+  .dashboardHeader,
+  .sectionHeader,
+  .heroCopy,
+  .dashboardHeader > div,
+  .sectionHeader > div,
+  .heroCopy > div {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .dashboardHeader {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .dashboardHeader > button {
+    flex-shrink: 0;
+  }
+
+  .heroCopy h1,
+  .sectionHeader h1,
+  .dashboardHeader h1,
+  .heroCopy p,
+  .sectionHeader p,
+  .dashboardHeader p,
+  .badge {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: normal;
+    white-space: normal;
+    word-break: normal;
+  }
+
   .heroCopy h1,
   .sectionHeader h1,
   .dashboardHeader h1 {
-    max-width: 100%;
-    overflow-wrap: anywhere;
-    word-break: normal;
-   }
+    inline-size: 100%;
+    text-wrap: balance;
+  }
 
   .grid.four {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2045,7 +2078,8 @@ button.tiny.secondary {
   .heroCopy h1,
   .sectionHeader h1,
   .dashboardHeader h1 {
-    font-size: clamp(28px, 8.5vw, 38px);
+    font-size: clamp(34px, 10vw, 44px);
+    line-height: 1.04;
   }
   .surface,
   .mapCard,
@@ -2060,10 +2094,6 @@ button.tiny.secondary {
   }
   .heroStats {
     grid-template-columns: 1fr;
-  }
-  .dashboardHeader {
-    align-items: start;
-    flex-direction: column;
   }
   .resultPanel { position: static; }
   .map { height: 360px; }
