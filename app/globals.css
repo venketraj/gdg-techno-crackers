@@ -1013,6 +1013,120 @@ button:disabled {
   font-size: 14px;
 }
 
+.departmentSummary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.departmentGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.departmentCard {
+  display: grid;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.departmentCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--accent);
+}
+
+.departmentCard.blue::before { background: #2563eb; }
+.departmentCard.green::before { background: #22a06b; }
+.departmentCard.amber::before { background: #f59e0b; }
+.departmentCard.cyan::before { background: #0ea5a3; }
+
+.departmentCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.departmentIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f0edff;
+  color: var(--accent);
+}
+
+.departmentCard.blue .departmentIcon { background: #eaf3ff; color: #2563eb; }
+.departmentCard.green .departmentIcon { background: #eafaf1; color: #22a06b; }
+.departmentCard.amber .departmentIcon { background: #fff7e6; color: #d97706; }
+.departmentCard.cyan .departmentIcon { background: #e7fbfb; color: #0ea5a3; }
+
+.departmentCard h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.departmentCardHeader p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.departmentStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.departmentStats div {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fbfcff;
+}
+
+.departmentStats span,
+.departmentIssue span,
+.departmentIssue small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.departmentStats strong {
+  font-size: 22px;
+}
+
+.departmentFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.departmentIssue {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f8f9ff;
+}
+
+.departmentIssue.empty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.departmentIssue.empty svg {
+  color: var(--good);
+}
+
 .analyticsGrid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(360px, 0.92fr);
@@ -1618,7 +1732,7 @@ button.tiny.secondary {
   70%, 100% { transform: translateX(420%) rotate(22deg); }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 900px) {
   main {
     max-width: none;
     padding: 24px 18px 52px;
@@ -1628,51 +1742,12 @@ button.tiny.secondary {
     grid-template-columns: 1fr;
   }
 
-  .sidebar {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    height: auto;
-    display: grid;
-    grid-template-columns: minmax(190px, auto) minmax(0, 1fr);
-    align-items: start;
-    gap: 12px;
-    padding: 14px;
-  }
-
-  .sidebarBrand {
-    min-width: 210px;
-  }
-
-  .sideNav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 8px;
-    overflow: visible;
-    padding-bottom: 0;
-  }
-
-  .sideNav a {
-    flex: 0 1 auto;
-    min-height: 42px;
-    padding: 0 12px;
-  }
-
-  .sideNav a:hover,
-  .sideNav a.active {
-    transform: translateY(-1px);
-  }
-
-  .weatherCard {
-    display: none;
-  }
-
-  .utilityBar {
-    position: static;
-  }
-
   .grid.four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .departmentSummary,
+  .departmentGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1693,26 +1768,42 @@ button.tiny.secondary {
     grid-template-columns: 1fr;
   }
   .sidebar {
-    position: static;
+    position: sticky;
+    top: 0;
+    z-index: 30;
     height: auto;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 16px 14px;
+    gap: 10px;
+    padding: 12px;
+  }
+  .sidebarBrand {
+    min-width: 0;
   }
   .sidebarBrand strong {
     max-width: none;
   }
   .sideNav {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
     overflow: visible;
     padding-bottom: 0;
   }
   .sideNav a {
-    min-height: 40px;
-    padding: 0 12px;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+  .sideNav a span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .sideNav a svg {
+    width: 16px;
+    height: 16px;
   }
   .weatherCard {
     display: none;
@@ -1726,8 +1817,9 @@ button.tiny.secondary {
   }
   .utilityActions {
     width: 100%;
-    overflow-x: auto;
-    padding-bottom: 2px;
+    flex-wrap: wrap;
+    overflow: visible;
+    padding-bottom: 0;
   }
   .hero,
   .homeHero,
@@ -1737,6 +1829,8 @@ button.tiny.secondary {
   .mapPageGrid,
   .settingsHero,
   .settingsGrid,
+  .departmentSummary,
+  .departmentGrid,
   .featureGrid,
   .grid.four,
   .grid.two {
@@ -1805,6 +1899,9 @@ button.tiny.secondary {
   .settingsList strong {
     text-align: left;
   }
+  .departmentStats {
+    grid-template-columns: 1fr;
+  }
   .insightHero {
     grid-template-columns: 1fr;
     justify-items: start;
@@ -1855,8 +1952,8 @@ button.tiny.secondary {
   }
 
   .sidebar {
-    gap: 12px;
-    padding: 12px 10px;
+    gap: 8px;
+    padding: 10px;
   }
 
   .sidebarBrand {
@@ -1869,18 +1966,18 @@ button.tiny.secondary {
   }
 
   .brandMark {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
     font-size: 13px;
   }
 
   .sideNav a {
-    justify-content: flex-start;
-    gap: 8px;
-    min-height: 38px;
-    padding: 0 10px;
-    font-size: 13px;
+    justify-content: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 0 7px;
+    font-size: 11px;
   }
 
   .sideNav svg {
@@ -1958,6 +2055,11 @@ button.tiny.secondary {
     grid-template-columns: 1fr;
   }
 
+  .departmentSummary,
+  .departmentGrid {
+    grid-template-columns: 1fr;
+  }
+
   .metricTop {
     gap: 10px;
   }
@@ -2031,7 +2133,7 @@ button.tiny.secondary {
 
 @media (max-width: 380px) {
   .sideNav {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

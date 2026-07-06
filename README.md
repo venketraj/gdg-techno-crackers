@@ -15,26 +15,7 @@ Open:
 - `http://localhost:3000/dashboard`
 - `http://localhost:3000/api/health`
 
-The checked-in `.env.local` uses demo database mode and local file storage, so the UI works immediately. For Vercel, use `DATABASE_PROVIDER=demo`, `STORAGE_PROVIDER=memory`, and `AI_PROVIDER=mock`.
-
-## Vercel demo setup
-
-This project supports a seeded demo deployment on Vercel. Fixed demo users, clusters, and validation records live in `data/demoSeed.ts`, then new reports append to in-memory state for the current live server session.
-
-Use these Vercel environment variables:
-
-```bash
-DATABASE_PROVIDER=demo
-DATABASE_URL=
-STORAGE_PROVIDER=memory
-AI_PROVIDER=mock
-OPEN_METEO_ENABLED=false
-NEXT_PUBLIC_DEFAULT_LATITUDE=9.9252
-NEXT_PUBLIC_DEFAULT_LONGITUDE=78.1198
-NEXT_PUBLIC_DEFAULT_ZOOM=13
-```
-
-Important: Vercel memory is not permanent. A redeploy, cold start, or different serverless instance returns the app to the committed seed data. Use Vercel Blob plus a hosted database later if reports must persist.
+The checked-in `.env.local` uses demo database mode and local file storage, so the UI works immediately. For the real PostgreSQL + OpenRouter path, copy values from `.env.example` into `.env.local`.
 
 ## Local PostgreSQL setup
 
@@ -54,7 +35,7 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5432/constituency_intelligen
 STORAGE_PROVIDER=local
 ```
 
-Uploaded report photos are saved under `public/uploads` locally and served from `/uploads/...`. On Vercel, uploaded report photos are held as in-memory data URLs for the current session.
+Uploaded report photos are saved under `public/uploads` and served from `/uploads/...`.
 
 ## Clustering behavior
 
